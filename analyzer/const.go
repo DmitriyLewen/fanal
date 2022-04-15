@@ -26,7 +26,8 @@ const (
 	TypeRpm  Type = "rpm"
 
 	// OS Package Repository
-	TypeApkRepo Type = "apk-repo"
+	TypeApkRepo         Type = "apk-repo"
+	TypeApkSecfixedRepo Type = "apk-secfixed-repo"
 
 	// ============================
 	// Programming Language Package
