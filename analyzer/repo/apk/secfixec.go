@@ -20,7 +20,7 @@ func init() {
 const secfixecAnalyzerVersion = 1
 
 var (
-	requiredFilesRegexp    = regexp.MustCompile(`^etc/secfixes.d/([A-Za-z0-9_.-]+)$`)
+	requiredFilesRegexp    = regexp.MustCompile(`^/?etc/secfixes.d/([A-Za-z0-9_.-]+)$`)
 	secfixecUrlParseRegexp = regexp.MustCompile(`(https*|ftp)://[0-9A-Za-z.-]+/v?([0-9A-Za-z_.-]+)/`)
 )
 
