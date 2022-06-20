@@ -5,12 +5,13 @@ import (
 	"context"
 	"os"
 
+	"golang.org/x/exp/slices"
+
 	"golang.org/x/xerrors"
 
 	"github.com/aquasecurity/fanal/analyzer"
 	aos "github.com/aquasecurity/fanal/analyzer/os"
 	"github.com/aquasecurity/fanal/types"
-	"github.com/aquasecurity/fanal/utils"
 )
 
 func init() {
@@ -35,7 +36,7 @@ func (a alpineOSAnalyzer) Analyze(_ context.Context, input analyzer.AnalysisInpu
 }
 
 func (a alpineOSAnalyzer) Required(filePath string, _ os.FileInfo) bool {
-	return utils.StringInSlice(filePath, requiredFiles)
+	return slices.Contains(requiredFiles, filePath)
 }
 
 func (a alpineOSAnalyzer) Type() analyzer.Type {

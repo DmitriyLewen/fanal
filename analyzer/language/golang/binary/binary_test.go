@@ -17,7 +17,6 @@ func Test_gobinaryLibraryAnalyzer_Analyze(t *testing.T) {
 		name      string
 		inputFile string
 		want      *analyzer.AnalysisResult
-		wantErr   string
 	}{
 		{
 			name:      "happy path",
@@ -28,7 +27,10 @@ func Test_gobinaryLibraryAnalyzer_Analyze(t *testing.T) {
 						Type:     types.GoBinary,
 						FilePath: "testdata/executable_gobinary",
 						Libraries: []types.Package{
-							{Name: "github.com/aquasecurity/go-pep440-version", Version: "v0.0.0-20210121094942-22b2f8951d46"},
+							{
+								Name:    "github.com/aquasecurity/go-pep440-version",
+								Version: "v0.0.0-20210121094942-22b2f8951d46",
+							},
 							{Name: "github.com/aquasecurity/go-version", Version: "v0.0.0-20210121072130-637058cfe492"},
 							{Name: "golang.org/x/xerrors", Version: "v0.0.0-20200804184101-5ec99f83aff1"},
 						},
@@ -43,7 +45,6 @@ func Test_gobinaryLibraryAnalyzer_Analyze(t *testing.T) {
 		{
 			name:      "broken elf",
 			inputFile: "testdata/broken_elf",
-			wantErr:   "unexpected EOF",
 		},
 	}
 	for _, tt := range tests {
@@ -59,11 +60,6 @@ func Test_gobinaryLibraryAnalyzer_Analyze(t *testing.T) {
 				Content:  f,
 			})
 
-			if tt.wantErr != "" {
-				require.NotNil(t, err)
-				assert.Contains(t, err.Error(), tt.wantErr)
-				return
-			}
 			assert.NoError(t, err)
 			assert.Equal(t, tt.want, got)
 		})
